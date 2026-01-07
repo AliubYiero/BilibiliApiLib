@@ -1,5 +1,5 @@
 {
-  "name": "bilibili-api-lib",
+  "name": "@yiero/bilibili-api-lib",
   "version": "0.0.0",
   "type": "module",
   "exports": {
