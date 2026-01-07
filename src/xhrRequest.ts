@@ -15,6 +15,10 @@ export interface XhrOptions {
 	headers?: Record<string, string>;
 	/** 请求体 (普通对象会被自动序列化为 JSON) */
 	body?: any;
+	/**
+	 * 查询参数 (普通对象会被自动序列化为 URLSearchParams)
+	 * */
+	params?: Record<string, string>;
 	/** 是否携带 cookies 和跨域认证信息 */
 	withCredentials?: boolean;
 	/** 超时时间（毫秒），默认 20000 */
@@ -24,6 +28,17 @@ export interface XhrOptions {
 	/** 上传/下载进度回调 */
 	onProgress?: ( event: ProgressEvent ) => void;
 }
+
+/**
+ * 请求的响应内容
+ */
+export interface XhrResponse<T> {
+	code: number;
+	message: string;
+	ttl: number;
+	data: T;
+}
+
 
 /**
  * 辅助：规范化 Headers Key 为小写
@@ -76,7 +91,7 @@ const processBody = (
 export async function xhrRequest<T = any>(
 	url: string,
 	options: XhrOptions = {},
-): Promise<T> {
+): Promise<XhrResponse<T>> {
 	// 1. 默认参数处理
 	const {
 		method = 'GET',
@@ -91,7 +106,13 @@ export async function xhrRequest<T = any>(
 	// 3. Body 处理 & Content-Type 自动补全
 	const requestBody = processBody( options.body, headers );
 	
-	// 4. 智能推断 ResponseType
+	// 4. 查询参数处理
+	if ( options.params ) {
+		const searchParams = new URLSearchParams( options.params );
+		url += `?${ searchParams.toString() }`;
+	}
+	
+	// 5. 智能推断 ResponseType
 	// 如果用户未指定，且 Accept 头包含 json，或者完全未指定，则默认为 json
 	let responseType = options.responseType;
 	if ( !responseType ) {
@@ -108,7 +129,7 @@ export async function xhrRequest<T = any>(
 		}
 	}
 	
-	return new Promise<T>( ( resolve, reject ) => {
+	return new Promise( ( resolve, reject ) => {
 		const xhr = new XMLHttpRequest();
 		
 		xhr.open( method.toUpperCase(), url, true );
@@ -130,7 +151,7 @@ export async function xhrRequest<T = any>(
 		xhr.addEventListener( 'load', () => {
 			if ( xhr.status >= 200 && xhr.status < 300 ) {
 				// 如果 responseType 是 json 但返回空，xhr.response 可能是 null
-				resolve( xhr.response as T );
+				resolve( xhr.response as XhrResponse<T> );
 			}
 			else {
 				reject(
