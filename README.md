@@ -29,3 +29,15 @@ export declare function api_getSeasonInfo(seasonId: number): Promise<ISeasonInfo
 export declare function api_getSeasonSectionInfo(sectionId: number): Promise<ISeasonSectionInfo>;
 ```
 
+- `api_editSeason`: [编辑合集信息](https://socialsisteryi.github.io/bilibili-API-collect/docs/creativecenter/season.html#%E7%BC%96%E8%BE%91%E5%90%88%E9%9B%86%E4%BF%A1%E6%81%AF)
+
+```ts
+export declare function api_editSeason(season: IEditSeasonBody['season'], sorts: IEditSeasonBody['sorts']): Promise<import("../xhrRequest.ts").XhrResponse<undefined>>;
+```
+
+- `api_editSeasonSection`: [编辑合集小节](https://socialsisteryi.github.io/bilibili-API-collect/docs/creativecenter/season.html#%E7%BC%96%E8%BE%91%E5%90%88%E9%9B%86%E5%B0%8F%E8%8A%82)
+
+```ts
+export declare function api_editSeasonSection(section: IEditSeasonSectionBody['section'], sorts: IEditSeasonSectionBody['sorts']): Promise<import("../xhrRequest.ts").XhrResponse<undefined>>;
+```
+
