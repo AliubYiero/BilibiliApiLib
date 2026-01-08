@@ -1,5 +1,6 @@
 import { xhrRequest } from '../xhrRequest.ts';
 import { IEditSeasonBody } from './interface/IEditSeason.ts';
+import { getCsrf } from '../utils/getCsrf.ts';
 
 /**
  * 编辑合集信息
@@ -10,13 +11,10 @@ export async function api_editSeason(
 	season: IEditSeasonBody['season'],
 	sorts: IEditSeasonBody['sorts'],
 ) {
-	const csrfCookie = await cookieStore.get( 'bili_jct' );
-	if ( !csrfCookie || !csrfCookie.value ) {
-		throw new NotLoginError();
-	}
+	const csrf = await getCsrf();
 	return xhrRequest.postWithCredentials<undefined>( 'https://member.bilibili.com/x2/creative/web/season/edit', {
 		params: {
-			csrf: csrfCookie.value,
+			csrf: csrf,
 		},
 		body: {
 			season,
