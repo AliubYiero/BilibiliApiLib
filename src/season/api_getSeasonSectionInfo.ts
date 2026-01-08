@@ -1,5 +1,5 @@
 import { xhrRequest } from '../xhrRequest.ts';
-import ISeasonSectionInfo from './interface/ISeasonSectionInfo.ts';
+import { ISeasonSectionInfo } from './interface/ISeasonSectionInfo.ts';
 
 /**
  * 获取合集小节中的视频
@@ -15,3 +15,5 @@ export function api_getSeasonSectionInfo(
 		},
 	} );
 }
+
+export type { ISeasonSectionInfo };

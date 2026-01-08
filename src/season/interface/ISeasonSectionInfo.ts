@@ -1,4 +1,4 @@
-export default interface ISeasonSectionInfo {
+export interface ISeasonSectionInfo {
 	section?: Section;
 	episodes?: Episodes[];
 }

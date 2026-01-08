@@ -183,8 +183,13 @@ export async function xhrRequest<T = any>(
 // --------------------------------------------------------------------------
 
 // 定义静态方法的类型
-type RequestHelper = <T = any>( url: string, options?: Omit<XhrOptions, 'method'> ) => Promise<T>;
-type RequestHelperWithAuth = <T = any>( url: string, options?: Omit<XhrOptions, 'method' | 'withCredentials'> ) => Promise<T>;
+type RequestHelper = <T = any>(
+	url: string,
+	options?: Omit<XhrOptions, 'method'> ) => Promise<XhrResponse<T>>;
+type RequestHelperWithAuth = <T = any>(
+	url: string,
+	options?: Omit<XhrOptions, 'method' | 'withCredentials'>,
+) => Promise<XhrResponse<T>>;
 
 // 挂载静态方法
 xhrRequest.get = ( ( url, options ) => {
