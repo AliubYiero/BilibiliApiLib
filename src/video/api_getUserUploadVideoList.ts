@@ -13,7 +13,7 @@ export function api_getUserUploadVideoList(
 ) {
 	pageSize = Math.min( pageSize, 100 );
 	
-	return xhrRequest.getWithCredentials<IUserUploadVideo>( 'https://api.bilibili.com/x/series/recArchivesByKeywords', {
+	return xhrRequest.get<IUserUploadVideo>( 'https://api.bilibili.com/x/series/recArchivesByKeywords', {
 		params: {
 			mid: uid.toString(),
 			keywords: '',
