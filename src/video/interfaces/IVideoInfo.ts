@@ -1,156 +1,135 @@
-export interface ownerItem {
-	face: string;
-	name: string;
-	mid: number;
-}
-
-export interface statItem {
-	now_rank: number;
-	like: number;
-	dislike: number;
-	his_rank: number;
-	evaluation: string;
-	view: number;
-	danmaku: number;
-	share: number;
-	reply: number;
-	aid: number;
-	favorite: number;
-	vt: number;
-	coin: number;
-}
-
-export interface argue_infoItem {
-	argue_msg: string;
-	argue_link: string;
-	argue_type: number;
-}
-
-export interface pagesItem {
-	duration: number;
-	vid: string;
-	part: string;
-	weblink: string;
-	ctime: number;
-	from: string;
-	page: number;
-	dimension: dimensionItem;
-	cid: number;
-	first_frame: string;
-}
-
 export interface IVideoInfo {
 	bvid: string;
-	copyright: number;
-	argue_info: argue_infoItem;
-	is_upower_play: boolean;
-	tid_v2: number;
-	is_chargeable_season: boolean;
-	is_view_self: boolean;
-	user_garb: user_garbItem;
-	is_story_play: number;
+	aid: number;
 	videos: number;
+	tid: number;
+	tid_v2: number;
+	tname: string;
+	tname_v2: string;
+	copyright: number;
 	pic: string;
 	title: string;
-	is_upower_exclusive_with_qa: boolean;
-	tid: number;
-	is_story: boolean;
-	duration: number;
-	vt_display: string;
-	pages: Array<pagesItem>;
-	no_cache: boolean;
-	tname_v2: string;
-	rights: rightsItem;
-	need_jump_bv: boolean;
-	ctime: number;
-	dynamic: string;
-	state: number;
-	like_icon: string;
-	dimension: dimensionItem;
-	is_upower_preview: boolean;
 	pubdate: number;
-	owner: ownerItem;
-	desc_v2: any;
-	is_upower_exclusive: boolean;
-	stat: statItem;
-	enable_vt: number;
-	tname: string;
-	is_season_display: boolean;
-	teenage_mode: number;
-	premiere: any;
-	honor_reply: honor_replyItem;
-	subtitle: Array<subtitleItem>;
-	aid: number;
+	ctime: number;
 	desc: string;
+	desc_v2: null;
+	state: number;
+	duration: number;
+	rights: { [ key: string ]: number };
+	owner: Owner;
+	stat: Stat;
+	argue_info: ArgueInfo;
+	dynamic: string;
 	cid: number;
+	dimension: Dimension;
+	premiere: null;
+	teenage_mode: number;
+	is_chargeable_season: boolean;
+	is_story: boolean;
+	is_upower_exclusive: boolean;
+	is_upower_play: boolean;
+	is_upower_preview: boolean;
+	enable_vt: number;
+	vt_display: string;
+	is_upower_exclusive_with_qa: boolean;
+	no_cache: boolean;
+	pages: Page[];
+	subtitle: Subtitle;
+	is_season_display: boolean;
+	user_garb: UserGarb;
+	honor_reply: HonorReply;
+	like_icon: string;
+	need_jump_bv: boolean;
 	disable_show_up_info: boolean;
+	is_story_play: number;
+	is_view_self: boolean;
 }
 
-export interface authorItem {
-	birthday: number;
-	sex: string;
-	name_render: any;
-	sign: string;
-	in_reg_audit: number;
-	mid: number;
-	handle: string;
-	face: string;
-	is_deleted: number;
-	name: string;
-	rank: number;
-	is_senior_member: number;
-	is_fake_account: number;
+export interface ArgueInfo {
+	argue_msg: string;
+	argue_type: number;
+	argue_link: string;
 }
 
-export interface honor_replyItem {
-}
-
-export interface rightsItem {
-	clean_mode: number;
-	free_watch: number;
-	movie: number;
-	is_cooperation: number;
-	ugc_pay: number;
-	no_background: number;
-	pay: number;
-	elec: number;
-	ugc_pay_preview: number;
-	bp: number;
-	autoplay: number;
-	download: number;
-	no_reprint: number;
-	is_360: number;
-	no_share: number;
-	hd5: number;
-	is_stein_gate: number;
-	arc_pay: number;
-}
-
-export interface subtitleItem {
-	allow_submit: boolean;
-	list: Array<listItem>;
-}
-
-export interface user_garbItem {
-	url_image_ani_cut: string;
-}
-
-export interface listItem {
-	subtitle_url: string;
-	lan_doc: string;
-	author: authorItem;
-	id_str: string;
-	lan: string;
-	is_lock: boolean;
-	subtitle_height: any;
-	id: number;
-	ai_type: number;
-	type: number;
-	ai_status: number;
-}
-
-export interface dimensionItem {
-	rotate: number;
+export interface Dimension {
 	width: number;
 	height: number;
+	rotate: number;
+}
+
+export interface HonorReply {
+}
+
+export interface Owner {
+	mid: number;
+	name: string;
+	face: string;
+}
+
+export interface Page {
+	cid: number;
+	page: number;
+	from: string;
+	part: string;
+	duration: number;
+	vid: string;
+	weblink: string;
+	dimension: Dimension;
+	first_frame: string;
+	ctime: number;
+}
+
+export interface Stat {
+	aid: number;
+	view: number;
+	danmaku: number;
+	reply: number;
+	favorite: number;
+	coin: number;
+	share: number;
+	now_rank: number;
+	his_rank: number;
+	like: number;
+	dislike: number;
+	evaluation: string;
+	vt: number;
+}
+
+export interface Subtitle {
+	allow_submit: boolean;
+	list: List[];
+}
+
+export interface List {
+	id: number;
+	lan: string;
+	lan_doc: string;
+	is_lock: boolean;
+	subtitle_url: string;
+	type: number;
+	id_str: string;
+	ai_type: number;
+	ai_status: number;
+	subtitle_height: null;
+	author: Author;
+}
+
+export interface Author {
+	mid: number;
+	name: string;
+	sex: string;
+	face: string;
+	sign: string;
+	rank: number;
+	birthday: number;
+	is_fake_account: number;
+	is_deleted: number;
+	in_reg_audit: number;
+	is_senior_member: number;
+	name_render: null;
+	handle: string;
+}
+
+export interface UserGarb {
+	url_image_ani_cut: string;
 }
